@@ -52,7 +52,6 @@ const CharactersList = (props) => {
 				<div className="card-img">
 					<img
 						src={character.img}
-						alt=""
 						loading="lazy"
 						onError={(e) => {
 							e.target.onerror = null;
