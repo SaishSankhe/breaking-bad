@@ -1,0 +1,48 @@
+@import './variables';
+
+.character-name {
+	text-align: center;
+	font-family: $font-serif;
+	font-size: 40px;
+}
+
+.character-data {
+	display: flex;
+	flex-direction: column;
+	margin: 20px 0;
+
+	@media only screen and (min-width: 650px) {
+		flex-direction: row;
+	}
+
+	.character-img {
+		width: 100%;
+		border-radius: 10px;
+
+		@media only screen and (min-width: 650px) {
+			width: 30%;
+		}
+	}
+
+	.small-text {
+		font-size: 12px;
+		text-transform: uppercase;
+		color: $secondary;
+		letter-spacing: 0.5px;
+	}
+
+	.bold {
+		font-weight: bold;
+		font-size: 20px;
+		margin: 0;
+		text-transform: none;
+		color: $primary;
+		letter-spacing: 0;
+	}
+
+	.character-body {
+		@media only screen and (min-width: 650px) {
+			margin: 0 50px;
+		}
+	}
+}
