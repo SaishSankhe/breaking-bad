@@ -4,9 +4,9 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-const CharactersList = (props) => {
+const CharactersList = () => {
 	const [charactersList, setCharactersList] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 	const [sortPortrayed, setSortPortrayed] = useState(false);
 	const [sortName, setSortName] = useState(false);
@@ -14,6 +14,7 @@ const CharactersList = (props) => {
 	let cards = null;
 
 	useEffect(() => {
+		setLoading(true);
 		fetchData();
 		setLoading(false);
 		// eslint-disable-next-line
@@ -33,7 +34,6 @@ const CharactersList = (props) => {
 
 	async function fetchData() {
 		try {
-			setLoading(true);
 			const url = 'https://breakingbadapi.com/api/characters';
 			const { data } = await axios.get(url);
 			setCharactersList(data);
@@ -85,11 +85,10 @@ const CharactersList = (props) => {
 	};
 
 	const sortList = () => {
+		// if reset set, dont't execute the function and return
 		if (sortReset) return;
 
-		let sortedList = charactersList;
-
-		sortedList.sort(function (a, b) {
+		charactersList.sort(function (a, b) {
 			let nameA, nameB;
 
 			if (sortPortrayed) {
@@ -108,7 +107,7 @@ const CharactersList = (props) => {
 			return 0; //default return value (no sorting)
 		});
 
-		setCharactersList(sortedList);
+		setCharactersList(charactersList);
 	};
 
 	const sortButtons = () => {
@@ -125,6 +124,7 @@ const CharactersList = (props) => {
 							setSortReset(false);
 						}}
 						disabled={sortName ? 'disabled' : ''}
+						id="character-name-sort-btn"
 					>
 						Character name
 					</button>
@@ -137,6 +137,7 @@ const CharactersList = (props) => {
 							setSortReset(false);
 						}}
 						disabled={sortPortrayed ? 'disabled' : ''}
+						id="real-name-sort-btn"
 					>
 						Real name
 					</button>

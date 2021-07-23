@@ -6,8 +6,8 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Characters = (props) => {
-	const [characterData, setCharacterData] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [characterData, setCharacterData] = useState({});
+	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 	const { id: chracterId } = props.match.params;
 
@@ -30,35 +30,42 @@ const Characters = (props) => {
 	}
 
 	const showCharacterData = () => {
-		return (
-			<div>
-				<h2 className="character-name">{characterData.name}</h2>
-				<div className="character-data">
-					<img
-						src={characterData.img}
-						className="character-img"
-						alt={characterData.name}
-					></img>
-					<div className="character-body">
-						<p className="small-text">
-							Nickname: <p className="bold">{characterData.nickname}</p>
-						</p>
-						<p className="small-text">
-							Status: <p className="bold">{characterData.status}</p>
-						</p>
-						<p className="small-text">
-							Portrayed by: <p className="bold">{characterData.portrayed}</p>
-						</p>
-						<p className="small-text">
-							Occupation:{' '}
-							{characterData.occupation.map((item) => (
-								<p className="bold">{item}</p>
-							))}
-						</p>
+		console.log(characterData);
+		if (characterData !== {}) {
+			return (
+				<div>
+					<h2 className="character-name">{characterData.name}</h2>
+					<div className="character-data">
+						<img
+							src={characterData.img}
+							className="character-img"
+							alt={characterData.name}
+						></img>
+						<div className="character-body">
+							<p className="small-text">
+								Nickname: <p className="bold">{characterData.nickname}</p>
+							</p>
+							<p className="small-text">
+								Status: <p className="bold">{characterData.status}</p>
+							</p>
+							<p className="small-text">
+								Portrayed by: <p className="bold">{characterData.portrayed}</p>
+							</p>
+							<p className="small-text">
+								Occupation:{' '}
+								{characterData.occupation ? (
+									characterData.occupation.map((item) => (
+										<p className="bold">{item}</p>
+									))
+								) : (
+									<></>
+								)}
+							</p>
+						</div>
 					</div>
 				</div>
-			</div>
-		);
+			);
+		}
 	};
 
 	if (error) {
